@@ -1,0 +1,236 @@
+<!-- When Want to Login -->
+<div class="main-widget-box" *ngIf="!forgotPassword && !otpVerification">
+  <section>
+  <div class="m-t-4">
+    <div class="container">
+      <div class="row">
+        <div class="co-md-12 col-sm-12">
+
+          <div class="col-md-12 col-sm-12 text-center">
+            <div class="modal-header text-center social-login animated fadeInDown">
+              <div class="col-md-6 col-sm-6 text-right">
+                <!--Facebook-->
+                <button type="button" class="btn primary-color-dark btn-fb waves-effect waves-light text-color-white"><i class="mdi mdi-facebook mdi-20px left"></i> <b>Login</b> <em style="text-transform: none">with</em> <b>Facebook</b></button>
+              </div>
+              <div class="col-md-6 col-sm-6 text-left">
+                <!--Google +-->
+                <button type="button" class="btn danger-color btn-gplus waves-effect waves-light text-color-white"><i class="mdi mdi-google-plus mdi-20px left"></i> <b>Login</b> <em style="text-transform: none">with</em> <b>Google +</b></button>
+              </div>
+            </div>
+            <!-- Login start -->
+            <div class="col-md-6 col-sm-6 animated fadeInLeft">
+              <h4 class="text-color-light-grey text-center">Login</h4>
+              <div class="modal-body" style="padding:40px 50px 20px;">
+                <div class="row">
+                  <form class="col-md-12 col-sm-12" novalidate [formGroup]="loginForm" (submit)="login()">
+                    <div class="row">
+                      <div class="input-field">
+                        <i class="mdi mdi-email mdi-24px prefix text-color-light-grey"></i>
+                        <span class="number-prefix" *ngIf="isMobileLogin">+91</span>
+                        <input [class.mobile]="isMobileLogin" id="icon_email" type="text" class="validate" formControlName="emailMobile" >
+                        <span class="error-quote" *ngIf="loginForm.get('emailMobile').hasError('required') && loginForm.get('emailMobile').touched">Mobile or Email is mandatory</span>
+                        <span class="error-quote" *ngIf="!loginForm.get('emailMobile').hasError('required') && loginForm.get('emailMobile').hasError('invalidData') && loginForm.get('emailMobile').touched">Mobile or Email seems to be invalid</span>
+                        <label for="icon_email">Your email / Mobile</label>
+                      </div>
+
+                      <div class="input-field">
+                        <i class="mdi mdi-lock mdi-24px prefix text-color-light-grey"></i>
+                        <input id="password" type="password" class="validate" formControlName="password">
+                        <span class="error-quote" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">Password is mandatory</span>
+                        <label for="password">Password</label>
+                      </div>
+                      <br>
+                      <div class="col-md-12 col-sm-12">
+                        <div class="col-md-6 col-sm-6 text-left">
+                          <input type="checkbox" id="c1" name="cc" />
+                          <label class="remember" for="c1"><span></span>Remember me</label>
+                        </div>
+
+                        <div class="options col-md-6 col-sm-6">
+                          <p class="mdi-14px">
+                            <span class="pull-right">Forgot <a href="javascript:void(0);" (click)="loadPage(false);">Password?</a></span>
+                          </p>
+                        </div>
+                      </div>
+
+
+                      <div class="text-center col-md-12 col-sm-12" style="margin-top: 8.6%">
+                        <button type="submit" [class.disabled]="loginForm.invalid" [disabled]="loginForm.invalid" class="btn btn-default waves-effect waves-light">Login</button>
+                      </div>
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- /.Modal content-->
+
+            <!-- Login end -->
+            <div class="divid-horizontal-log"></div>
+
+            <!-- register start -->
+            <div class="col-md-6 col-sm-6 animated fadeInRight">
+              <h4 class="text-color-light-grey text-center">Register</h4>
+              <div class="modal-body" style="padding:20px 50px;">
+                <div class="row">
+                  <form class="col-md-12" novalidate [formGroup]="registrationForm" (submit)="register()">
+                    <div class="row">
+                      <div class="input-field">
+                        <i class="mdi mdi-account mdi-24px prefix text-color-light-grey"></i>
+                        <span *ngIf="isMobileRegistration" class="number-prefix">+91</span>
+                        <input [class.mobile]="isMobileRegistration" id="name" type="tel" class="validate mobile" formControlName="emailMobile">
+                        <span class="error-quote" *ngIf="registrationForm.get('emailMobile').hasError('required') && registrationForm.get('emailMobile').touched">Mobile or Email is mandatory</span>
+                        <span class="error-quote" *ngIf="!registrationForm.get('emailMobile').hasError('required') && registrationForm.get('emailMobile').hasError('invalidData') && loginForm.get('emailMobile').touched">Mobile or Email seems to be invalid</span>
+                        <label for="name">Email / Mobile *</label>
+                      </div>
+
+                      <div class="input-field">
+                        <i class="mdi mdi-lock mdi-24px prefix text-color-light-grey"></i>
+                        <input id="password1" type="password" class="validate" formControlName="password">
+                        <span class="error-quote" *ngIf="registrationForm.get('password').hasError('required') && registrationForm.get('password').touched">Password is mandatory</span>
+                        <span class="error-quote" *ngIf="!registrationForm.get('password').hasError('required') && (registrationForm.get('password').hasError('minlength') || registrationForm.get('password').hasError('maxlength'))">Password Length must be between 6-16</span>
+                        <label for="password1">Password *</label>
+                      </div>
+
+                      <div class="input-field">
+                        <i class="mdi mdi-lock mdi-24px prefix text-color-light-grey"></i>
+                        <input id="retype-password" type="password" class="validate" formControlName="confirmPassword">
+                        <span class="error-quote" *ngIf="registrationForm.get('confirmPassword').hasError('required') && registrationForm.get('confirmPassword').touched">Confirm your password!</span>
+                        <span class="error-quote" *ngIf="!registrationForm.get('confirmPassword').hasError('required') && registrationForm.hasError('mismatchedPasswords')">Confirm Password doesn't match with password!</span>
+                        <label for="retype-password">Re-Type Password *</label>
+                      </div>
+                      <br>
+                      <div class="col-md-12 col-sm-12 text-left">
+                        <input type="checkbox" id="t_and_c" name="t_and_c" formControlName="t_and_c"/>
+                        <label class="remember" for="t_and_c"><span></span>** Accept Terms & Conditions **</label>
+                      </div>
+
+                      <br>
+                      <div class="col-md-12 col-sm-12 text-center">
+                        <button type="submit" [disabled]="registrationForm.invalid" [class.disabled]="registrationForm.invalid" class="btn btn-default waves-effect waves-light">Sign Up</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <!-- register end -->
+            </div>
+            <!-- register end-->
+            <!--Footer-->
+            <!--<div class="modal-footer col-md-12 col-sm-12 animated fadeInUp">
+                <p class="text-center" style="font-size:13px;">By creating an account, you agree to our  <a href="term.html">Terms & Conditions</a></p>
+            </div>-->
+            <!--/.Footer-->
+          </div><!--- col-md-12 col-sm-12 ---->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- When want to retrieve password -->
+<div class="main-widget-box" *ngIf="forgotPassword">
+  <section>
+  <div class="m-t-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <!-- register start -->
+          <div class="reset-pass animated fadeInDown">
+            <div class="">
+              <div class="modal-header text-center">
+                <h5>Reset your password</h5>
+              </div>
+              <div class="modal-body" style="padding:20px 50px 20px;">
+                <div class="row">
+                  <p class="mdi-14px text-center">We can reset your password if you let us know your email address:</p>
+                </div>
+
+                <div class="row">
+                  <form class="col-md-12" novalidate [formGroup]="forgotPasswordForm" (submit)="forgotPasswordFunc()">
+
+                    <div class="input-field">
+                      <i class="mdi mdi-email mdi-24px prefix text-color-light-grey"></i>
+                      <span class="number-prefix" *ngIf="isMobileForgotPassword">+91</span>
+                      <input [class.mobile]="isMobileForgotPassword" id="icon_email_f" type="text" class="validate" formControlName="emailMobile" >
+                      <span class="error-quote" *ngIf="forgotPasswordForm.get('emailMobile').hasError('required') && forgotPasswordForm.get('emailMobile').touched">Mobile or Email is mandatory</span>
+                      <span class="error-quote" *ngIf="!forgotPasswordForm.get('emailMobile').hasError('required') && forgotPasswordForm.get('emailMobile').hasError('invalidData') && forgotPasswordForm.get('emailMobile').touched">Mobile or Email seems to be invalid</span>
+                      <label for="icon_email_f">Your email / Mobile</label>
+                    </div>
+
+                    <div class="text-center">
+                      <button type="submit" [class.disabled]="forgotPasswordForm.invalid" [disabled]="forgotPasswordForm.invalid" class="btn btn-default waves-effect waves-light">Send my password link!</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+            <!-- /.Modal content-->
+          </div>
+          <!-- register end -->
+        </div>
+      </div><!-- row --->
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- OTP Verification -->
+<div class="main-widget-box" *ngIf="otpVerification">
+  <section>
+    <div class="m-t-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 widget-box-container">
+            <!-- register start -->
+            <div class="reset-pass animated fadeInDown">
+              <div class="">
+                <div class="modal-header text-center">
+                  <h5>Verify Your Account</h5>
+                </div>
+                <div class="modal-body" style="padding:20px 50px 20px;">
+                  <div class="row">
+                    <p class="mdi-14px text-center">Enter Your OTP number here and verify your mobile number</p>
+                  </div>
+
+                  <div class="row">
+                    <form class="col-md-12 col-sm-12" (submit)="otpVerify()" [formGroup]="otpVerificationForm">
+
+                      <div class="input-field">
+                        <i class="mdi mdi-email mdi-24px prefix text-color-light-grey"></i>
+                        <input id="icon_email_o" [attr.maxlength]="6" [attr.minlength]="6" formControlName="otp" type="tel" class="validate">
+                        <label for="icon_email_o">Enter here OTP</label>
+                        <span class="error-quote" *ngIf="otpVerificationForm.get('otp').hasError('required') && otpVerificationForm.get('otp').touched">Enter OTP to proceed further</span>
+                        <span class="error-quote" *ngIf="!otpVerificationForm.get('otp').hasError('required') && otpVerificationForm.get('otp').hasError('invalidData')">OTP is incorrect</span>
+                        <span class="error-quote" *ngIf="otpVerificationForm.valid && incorrectOTP">Entered OTP is incorrect</span>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div *ngIf="otpResend" class="col-md-12 col-sm-12 text-center text-color-dark-grey">
+                        {{ otpText }}
+                      </div>
+                      <div class="col-md-12 col-sm-12 text-center text-color-light-grey">
+                        Don't get any OTP click here... <button type="button" class="btn-without-bg" (click)="resendOtp()">Resend</button>
+                      </div>
+                      <br>
+
+                      <div class="col-md-12 col-sm-12 text-center">
+                        <button type="submit" [class.disabled]="otpVerificationForm.invalid" [disabled]="otpVerificationForm.invalid" class="btn btn-default waves-effect waves-light">Verify</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.Modal content-->
+            </div>
+            <!-- register end -->
+          </div>
+        </div><!-- row --->
+      </div>
+    </div>
+  </section>
+</div>
